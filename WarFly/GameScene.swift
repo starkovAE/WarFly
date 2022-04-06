@@ -30,9 +30,14 @@ class GameScene: SKScene {
             let x: CGFloat = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(screen.size.width)))
             let y: CGFloat = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(screen.size.height)))
             //создаем остров
-            let island = Island.polulateIsland(at: CGPoint(x: x, y: y))
+            let island = Island.polulateSpite(at: CGPoint(x: x, y: y))
             self.addChild(island)
+            //создаем облако и добавляем его на экран
+            let cloud = Cloud.polulateSpite(at: CGPoint(x: x, y: y))
+            self.addChild(cloud)
         }
+      
+  
         
     }
 }

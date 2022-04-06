@@ -8,8 +8,8 @@
 import SpriteKit
 import GameplayKit
 
-class Island: SKSpriteNode {
-    static func polulateIsland(at point: CGPoint) -> Island {
+final class Island: SKSpriteNode, GameBackgroundSpriteable {
+    static func polulateSpite(at point: CGPoint) -> Island {
         let islandImgeName = configureIslandName()
         let island = Island(imageNamed: islandImgeName)
         island.setScale(randomScaleFactor)
