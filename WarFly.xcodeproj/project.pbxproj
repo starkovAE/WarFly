@@ -13,6 +13,7 @@
 		3F4B077B27FDF38000735244 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B077927FDF38000735244 /* Main.storyboard */; };
 		3F4B077D27FDF38100735244 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B077C27FDF38100735244 /* Assets.xcassets */; };
 		3F4B078027FDF38100735244 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B077E27FDF38100735244 /* LaunchScreen.storyboard */; };
+		3F4B078727FDF71700735244 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B078627FDF71700735244 /* Background.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		3F4B077A27FDF38000735244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F4B077C27FDF38100735244 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F4B077F27FDF38100735244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3F4B078627FDF71700735244 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				3F4B076F27FDF38000735244 /* AppDelegate.swift */,
 				3F4B077527FDF38000735244 /* GameScene.swift */,
 				3F4B077727FDF38000735244 /* GameViewController.swift */,
+				3F4B078627FDF71700735244 /* Background.swift */,
 				3F4B077927FDF38000735244 /* Main.storyboard */,
 				3F4B077C27FDF38100735244 /* Assets.xcassets */,
 				3F4B077E27FDF38100735244 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 				3F4B077627FDF38000735244 /* GameScene.swift in Sources */,
 				3F4B077827FDF38000735244 /* GameViewController.swift in Sources */,
 				3F4B077027FDF38000735244 /* AppDelegate.swift in Sources */,
+				3F4B078727FDF71700735244 /* Background.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,5 +17,9 @@ class GameScene: SKScene {
         print(anchorPoint)
         self.addChild(sprite)
         
+        let screenCenterPoint = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        let background = Background.populateBackground(at: screenCenterPoint)
+        background.size = self.size //чтобы фон был по размеру экрана
+        self.addChild(background) //добавляем на экран
     }
 }
