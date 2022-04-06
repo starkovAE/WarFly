@@ -21,5 +21,18 @@ class GameScene: SKScene {
         let background = Background.populateBackground(at: screenCenterPoint)
         background.size = self.size //чтобы фон был по размеру экрана
         self.addChild(background) //добавляем на экран
+        
+        //острова:
+        //узнаем размер экрана пользователя
+        let screen = UIScreen.main.bounds
+        for _  in 1...5 { //будет 5 островов на экране
+            //создаем константу x, которая будет каждый раз конфигурироваться. Генирируем рандомное число, а потом указываем верхнюю границу по x
+            let x: CGFloat = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(screen.size.width)))
+            let y: CGFloat = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(screen.size.height)))
+            //создаем остров
+            let island = Island.polulateIsland(at: CGPoint(x: x, y: y))
+            self.addChild(island)
+        }
+        
     }
 }
