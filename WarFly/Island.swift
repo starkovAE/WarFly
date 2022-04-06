@@ -16,11 +16,11 @@ final class Island: SKSpriteNode, GameBackgroundSpriteable {
         island.position = point
         island.zPosition = 1 //zPosition - величина отностельно родителя (выше фона)
         island.run(rotateForRandomAngle())
-        
+        island.run(move(from: point)) //вызвали метод
         return island
     }
     //MARK: - Конфигурирует изображения острова
-    static func configureIslandName() -> String {
+    private static  func configureIslandName() -> String {
         let distribution = GKRandomDistribution(lowestValue: 1, highestValue: 4) //так как у нас 4 изображения
          let randomNumber = distribution.nextInt()
         let imageName = "is" + "\(randomNumber)"
@@ -28,17 +28,29 @@ final class Island: SKSpriteNode, GameBackgroundSpriteable {
         return imageName
     }
     //MARK: - Конфигурирует масштаб острова
-    static var randomScaleFactor: CGFloat {
+    private static  var randomScaleFactor: CGFloat {
        let distribution = GKRandomDistribution(lowestValue: 1, highestValue: 10)
         let randomNumber = CGFloat(distribution.nextInt()) / 10
         
         return randomNumber
     }
     //MARK: - Конфигурирует вращение острова
-    static func rotateForRandomAngle() -> SKAction {
+    private static  func rotateForRandomAngle() -> SKAction {
         let distribution = GKRandomDistribution(lowestValue: 0, highestValue: 360)
          let randomNumber = CGFloat(distribution.nextInt())
         return SKAction.rotate(toAngle: randomNumber * CGFloat(Double.pi / 180), duration: 0)// вызываем метод который будет вращать острова (передаем ему значение в радианах, делаем duration = 0, чтобы острова сразу же при появлении вращались)
     
+    }
+    //MARK: - Конфигурируем перемещение
+    private static func move(from point: CGPoint) -> SKAction {
+        //точка в которую происходит движение
+        let movePoint = CGPoint(x: point.x, y: -200) //x не меняется ( по х одно значение) объект движется к нижней точке экрана - 200
+        //исходная позиция
+        let moveDistance = point.y + 200
+        //начальная скорость
+        let moveSpeed: CGFloat = 10.0
+        let duration = moveDistance / moveSpeed
+        return SKAction.move(to: movePoint, duration: TimeInterval(duration))
+        
     }
 }
