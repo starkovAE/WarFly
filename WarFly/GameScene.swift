@@ -19,6 +19,12 @@ var player: PlayerPlain!
         spawnClouds()
         spawnIsland()
         player.performFly() //вызываем метод полета
+        
+        let powerUp = PowerUp()
+        powerUp.performRotation()
+        powerUp.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
+        self.addChild(powerUp)
+        
         }
 //MARK: - configurateStartScene()
     private func configurateStartScene() {
