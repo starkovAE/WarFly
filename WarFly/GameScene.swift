@@ -22,12 +22,21 @@ var player: PlayerPlain!
         DispatchQueue.main.asyncAfter(deadline: deadLine) { [unowned self] in //остраняем запуск на одну наносекунду
             self.player.performFly() //вызываем метод полета
         }
-        
+        //создаем powerUp
         let powerUp = PowerUp()
         powerUp.performRotation()
         powerUp.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
         self.addChild(powerUp)
         
+        //создаем врага
+        let enemyTextureAtlas = SKTextureAtlas(named: "Enemy_1")
+        SKTextureAtlas.preloadTextureAtlases([enemyTextureAtlas]) {
+            Enemy.textureAtlas = enemyTextureAtlas //используем атлас 
+            let enemy = Enemy()
+            enemy.position = CGPoint(x: self.size.width / 2, y: self.size.height * 2 / 3)
+            self.addChild(enemy)
+        }
+       
         }
 //MARK: - configurateStartScene()
     private func configurateStartScene() {
