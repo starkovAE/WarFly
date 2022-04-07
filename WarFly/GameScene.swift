@@ -68,7 +68,7 @@ var player: SKSpriteNode!
     private func spawnClouds() {
         let spawnCloudWait = SKAction.wait(forDuration: 1) //каждую секунду будет генерироваться облако
         let spawnCloudAction = SKAction.run { //внутри этого блока кода будет создаваться свое облако
-            let cloud = Cloud.polulate() //срабатывает метод populate с рандомным созданием точки
+            let cloud = Cloud.polulate(at: nil) //срабатывает метод populate с рандомным созданием точки
             self.addChild(cloud)
         }
         //нужно создать последовательность, которая будет
@@ -83,7 +83,7 @@ var player: SKSpriteNode!
     private func spawnIsland() {
         let spawnIslandWait = SKAction.wait(forDuration: 2) //каждую секунду будет генерироваться облако
         let spawnIslandAction = SKAction.run { //внутри этого блока кода будет создаваться свое облако
-            let island = Island.polulate() //срабатывает метод populate с рандомным созданием точки
+            let island = Island.polulate(at: nil) //срабатывает метод populate с рандомным созданием точки
             self.addChild(island)
         }
         //нужно создать последовательность, которая будет
@@ -104,6 +104,10 @@ var player: SKSpriteNode!
         } else if player.position.x > self.size.width + 70 { //если ушел направо на 70
             player.position.x = -70 //вычитаем  70
         }
-        
+        enumerateChildNodes(withName: "backgroundSprite") { node, stop in //node - это сам объхект, который мы получили при переборе, stop - это флаг, который возвращает либо тру либо фолс
+            if node.position.y < -199 {
+                node.removeFromParent() //все node (облака и острова) ниже нуля будут удаляться
+            }
+        }
     }
 }

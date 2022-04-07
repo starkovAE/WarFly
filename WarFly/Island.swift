@@ -9,23 +9,16 @@ import SpriteKit
 import GameplayKit
 
 final class Island: SKSpriteNode, GameBackgroundSpriteable {
-    static func polulate() -> Island {
+    
+    static func polulate(at point: CGPoint?) -> Island {
         let islandImgeName = configureIslandName()
         let island = Island(imageNamed: islandImgeName)
         island.setScale(randomScaleFactor)
-        island.position = randomPoint()
+        island.position = point ?? randomPoint()
         island.zPosition = 1 //zPosition - величина отностельно родителя (выше фона)
         island.run(rotateForRandomAngle())
-        island.run(move(from:  island.position)) //вызвали метод
-        return island
-    }
-    static func polulate(at point: CGPoint) -> Island {
-        let islandImgeName = configureIslandName()
-        let island = Island(imageNamed: islandImgeName)
-        island.setScale(randomScaleFactor)
-        island.position = point
-        island.zPosition = 1 //zPosition - величина отностельно родителя (выше фона)
-        island.run(rotateForRandomAngle())
+        island.name = "backgroundSprite" //у этих спрайтов теперь есть имя
+        island.anchorPoint = CGPoint(x: 0.5, y: 1.0) //хотим, чтобы когда верхняя граница node уходит за пределы экрана, тогда он сможет удалилться
         island.run(move(from:  island.position)) //вызвали метод
         return island
     }

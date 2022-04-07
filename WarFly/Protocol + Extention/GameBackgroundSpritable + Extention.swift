@@ -9,7 +9,7 @@ import SpriteKit
 import GameplayKit
 
 protocol GameBackgroundSpriteable { //прилоагательное, которым мы сможем назвать наш объект если он подписан на этот протокол
-    static func polulate() -> Self
+    static func polulate(at point: CGPoint?) -> Self
     static func randomPoint() -> CGPoint
 
     
@@ -19,7 +19,7 @@ extension GameBackgroundSpriteable {
     static func randomPoint() -> CGPoint { //данный метод позволяет использовать рандомные точки для генерации sprits
         let screen = UIScreen.main.bounds
         //destribution - нужен для вычисления y
-        let destribution = GKRandomDistribution(lowestValue: Int(screen.size.height + 100), highestValue: Int(screen.size.height + 200))
+        let destribution = GKRandomDistribution(lowestValue: Int(screen.size.height + 400), highestValue: Int(screen.size.height + 500))
         let y = CGFloat(destribution.nextInt())
         //вычисление х
         let x = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(screen.size.width)))
