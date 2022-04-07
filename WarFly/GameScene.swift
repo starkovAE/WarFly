@@ -3,25 +3,22 @@
 //  WarFly
 //
 //  Created by Александр Старков on 06.04.2022.
-//
+//ТУТ РЕАЛИЗАУЕТСЯ ВСЯ ЛОГИКА СЦЕНЫ
 
 import SpriteKit
 import GameplayKit
-import CoreMotion
+
 
 class GameScene: SKScene {
-    //создаем менеджера управления положения телефона
-    let motionManager = CMMotionManager()
-    var xAcceleration: CGFloat = 0
-    
+
     //создаем игрока
-var player: SKSpriteNode!
+var player: PlayerPlain!
     override func didMove(to view: SKView) {
         
         configurateStartScene()
         spawnClouds()
         spawnIsland()
-      
+        player.performFly() //вызываем метод полета
         }
 //MARK: - configurateStartScene()
     private func configurateStartScene() {
@@ -48,21 +45,12 @@ var player: SKSpriteNode!
     
         self.addChild(island2)
         
-        //создаем облако и добавляем его на экран
-//        let cloud = Cloud.polulate()
-//        self.addChild(cloud)
-//        
+
         player = PlayerPlain.populate(at: CGPoint(x: screen.size.width / 2, y: 100))
         self.addChild(player)
         
         
-        motionManager.accelerometerUpdateInterval = 0.2 //как часто акселерометр должен обновлять ускорения
-        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { data, error in //data - это данные которые получим с сенсоров
-            if let data = data { //если получили данные, извлекаем их в локальную дата
-                let acceleration = data.acceleration
-                self.xAcceleration = CGFloat(acceleration.x) * 0.7 + self.xAcceleration * 0.3 //получаем данные акселерометра и немного убавляем их (делаем их не линейными, немного искажаем)
-            }
-        }
+       
     }
     //MARK: - Метод srawnClouds(), который будет генирировать облака
     private func spawnClouds() {
@@ -95,15 +83,9 @@ var player: SKSpriteNode!
     }
     //MARK: - didSimulatePhysics (после симуляции) - отрабатывает, когда вся физика была просчитана для определенного кадра
     override func didSimulatePhysics() {
-        super.didSimulatePhysics()
-        //перемещение самолета
-        player.position.x += xAcceleration * 50
-        //ограничение самолета по границе экрана
-        if player.position.x < -70 { //если самолет зашел налево на - 70
-            player.position.x = self.size.width + 70 //мы добавляем к его правойпозиции, позицию экрана + 70
-        } else if player.position.x > self.size.width + 70 { //если ушел направо на 70
-            player.position.x = -70 //вычитаем  70
-        }
+        
+        player.checkPosition() //вызываем метод
+        
         enumerateChildNodes(withName: "backgroundSprite") { node, stop in //node - это сам объхект, который мы получили при переборе, stop - это флаг, который возвращает либо тру либо фолс
             if node.position.y < -199 {
                 node.removeFromParent() //все node (облака и острова) ниже нуля будут удаляться
