@@ -19,6 +19,8 @@ var player: SKSpriteNode!
     override func didMove(to view: SKView) {
         
         configurateStartScene()
+        spawnClouds()
+        spawnIsland()
       
         }
 //MARK: - configurateStartScene()
@@ -33,7 +35,7 @@ var player: SKSpriteNode!
         background.size = self.size //чтобы фон был по размеру экрана
         self.addChild(background) //добавляем на экран
         
-        //острова:
+        
         //узнаем размер экрана пользователя
         let screen = UIScreen.main.bounds
       
@@ -61,6 +63,35 @@ var player: SKSpriteNode!
                 self.xAcceleration = CGFloat(acceleration.x) * 0.7 + self.xAcceleration * 0.3 //получаем данные акселерометра и немного убавляем их (делаем их не линейными, немного искажаем)
             }
         }
+    }
+    //MARK: - Метод srawnClouds(), который будет генирировать облака
+    private func spawnClouds() {
+        let spawnCloudWait = SKAction.wait(forDuration: 1) //каждую секунду будет генерироваться облако
+        let spawnCloudAction = SKAction.run { //внутри этого блока кода будет создаваться свое облако
+            let cloud = Cloud.polulate() //срабатывает метод populate с рандомным созданием точки
+            self.addChild(cloud)
+        }
+        //нужно создать последовательность, которая будет
+        let spawnCloudSequence = SKAction.sequence([spawnCloudWait, spawnCloudAction])
+        let spawnCloudForever = SKAction.repeatForever(spawnCloudSequence) //метод, который повторяет действия вечно
+        
+        run(spawnCloudForever)
+        
+    }
+    
+    //MARK: - Метод srawnClouds(), который будет генирировать острова
+    private func spawnIsland() {
+        let spawnIslandWait = SKAction.wait(forDuration: 2) //каждую секунду будет генерироваться облако
+        let spawnIslandAction = SKAction.run { //внутри этого блока кода будет создаваться свое облако
+            let island = Island.polulate() //срабатывает метод populate с рандомным созданием точки
+            self.addChild(island)
+        }
+        //нужно создать последовательность, которая будет
+        let spawnIslandSequence = SKAction.sequence([spawnIslandWait, spawnIslandAction])
+        let spawnIslandForever = SKAction.repeatForever(spawnIslandSequence) //метод, который повторяет действия вечно
+        
+        run(spawnIslandForever)
+        
     }
     //MARK: - didSimulatePhysics (после симуляции) - отрабатывает, когда вся физика была просчитана для определенного кадра
     override func didSimulatePhysics() {
