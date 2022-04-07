@@ -9,20 +9,35 @@ import SpriteKit
 import GameplayKit
 
 protocol GameBackgroundSpriteable { //прилоагательное, которым мы сможем назвать наш объект если он подписан на этот протокол
-    static func polulateSpite(at point: CGPoint) -> Self
+    static func polulate() -> Self
+    static func randomPoint() -> CGPoint
+
     
 }
+//сделаем расширение для протокола
+extension GameBackgroundSpriteable {
+    static func randomPoint() -> CGPoint {
+        let screen = UIScreen.main.bounds
+        //destribution - нужен для вычисления y
+        let destribution = GKRandomDistribution(lowestValue: Int(screen.size.height + 100), highestValue: Int(screen.size.height + 200))
+        let y = CGFloat(destribution.nextInt())
+        //вычисление х
+        let x = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(screen.size.width)))
+        return CGPoint(x: x, y: y) //возвращаем рандомную точку (которая по у располагается от 100 до 200 выше экрана, а по х от 0 до ширины экрана по горизонтали)
+    }
+}
+
 
 final class Cloud: SKSpriteNode, GameBackgroundSpriteable {
     
-    static  func polulateSpite(at point: CGPoint) -> Cloud {
+    static  func polulate() -> Cloud {
         let cloudImgeName = configureName()
         let cloud = Cloud(imageNamed: cloudImgeName)
         cloud.setScale(randomScaleFactor)
-        cloud.position = point
+        cloud.position = randomPoint()
         cloud.zPosition = 10 //чтобы был зазор, вдруг чего добавим
 
-        cloud.run(move(from: point))
+        cloud.run(move(from: cloud.position))
         
         return cloud
     }
@@ -48,7 +63,7 @@ final class Cloud: SKSpriteNode, GameBackgroundSpriteable {
         //исходная позиция
         let moveDistance = point.y + 200
         //начальная скорость
-        let moveSpeed: CGFloat = 20.0
+        let moveSpeed: CGFloat = 150.0
         let duration = moveDistance / moveSpeed
         return SKAction.move(to: movePoint, duration: TimeInterval(duration))
         

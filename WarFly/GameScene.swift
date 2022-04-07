@@ -18,6 +18,11 @@ class GameScene: SKScene {
 var player: SKSpriteNode!
     override func didMove(to view: SKView) {
         
+        configurateStartScene()
+      
+        }
+//MARK: - configurateStartScene()
+    private func configurateStartScene() {
         let sprite = SKSpriteNode(color: .blue, size: CGSize(width: 100, height: 100))
         sprite.position = CGPoint(x: 200, y: 200)
         print(anchorPoint)
@@ -31,18 +36,20 @@ var player: SKSpriteNode!
         //острова:
         //узнаем размер экрана пользователя
         let screen = UIScreen.main.bounds
-        for _  in 1...5 { //будет 5 островов на экране
-            //создаем константу x, которая будет каждый раз конфигурироваться. Генирируем рандомное число, а потом указываем верхнюю границу по x
-            let x: CGFloat = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(screen.size.width)))
-            let y: CGFloat = CGFloat(GKRandomSource.sharedRandom().nextInt(upperBound: Int(screen.size.height)))
-            //создаем остров
-            let island = Island.polulateSpite(at: CGPoint(x: x, y: y))
-            self.addChild(island)
-            //создаем облако и добавляем его на экран
-            let cloud = Cloud.polulateSpite(at: CGPoint(x: x, y: y))
-            self.addChild(cloud)
-        }
       
+        //создаем остров
+        let island1 = Island.polulate(at: CGPoint(x: 100, y: 200))
+     
+        self.addChild(island1)
+        
+        let island2 = Island.polulate(at: CGPoint(x: self.size.width - 100, y: self.size.height - 200))
+    
+        self.addChild(island2)
+        
+        //создаем облако и добавляем его на экран
+//        let cloud = Cloud.polulate()
+//        self.addChild(cloud)
+//        
         player = PlayerPlain.populate(at: CGPoint(x: screen.size.width / 2, y: 100))
         self.addChild(player)
         

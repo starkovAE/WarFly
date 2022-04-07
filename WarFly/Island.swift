@@ -9,14 +9,24 @@ import SpriteKit
 import GameplayKit
 
 final class Island: SKSpriteNode, GameBackgroundSpriteable {
-    static func polulateSpite(at point: CGPoint) -> Island {
+    static func polulate() -> Island {
+        let islandImgeName = configureIslandName()
+        let island = Island(imageNamed: islandImgeName)
+        island.setScale(randomScaleFactor)
+        island.position = randomPoint()
+        island.zPosition = 1 //zPosition - величина отностельно родителя (выше фона)
+        island.run(rotateForRandomAngle())
+        island.run(move(from:  island.position)) //вызвали метод
+        return island
+    }
+    static func polulate(at point: CGPoint) -> Island {
         let islandImgeName = configureIslandName()
         let island = Island(imageNamed: islandImgeName)
         island.setScale(randomScaleFactor)
         island.position = point
         island.zPosition = 1 //zPosition - величина отностельно родителя (выше фона)
         island.run(rotateForRandomAngle())
-        island.run(move(from: point)) //вызвали метод
+        island.run(move(from:  island.position)) //вызвали метод
         return island
     }
     //MARK: - Конфигурирует изображения острова
@@ -48,7 +58,7 @@ final class Island: SKSpriteNode, GameBackgroundSpriteable {
         //исходная позиция
         let moveDistance = point.y + 200
         //начальная скорость
-        let moveSpeed: CGFloat = 10.0
+        let moveSpeed: CGFloat = 100.0
         let duration = moveDistance / moveSpeed
         return SKAction.move(to: movePoint, duration: TimeInterval(duration))
         
