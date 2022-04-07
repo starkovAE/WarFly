@@ -22,6 +22,7 @@ class PlayerPlain: SKSpriteNode {
     
     var moveDiraction: TurnDiraction = .none //(пер.)движение направления
     var stillTurning = false //начался ли у нас уже поворот
+    let animationSpriteStrides = [(13, 1, -1), (13, 26, 1), (13, 13, 1)] //массив с кортежами
     
     static func populate(at point: CGPoint) -> PlayerPlain {
         //текстура может меняться, а изображение нет
@@ -45,8 +46,8 @@ class PlayerPlain: SKSpriteNode {
     }
     //MARK: - performFly() - выполнение полета (основной метод)
     func performFly() {
-        
-        planeAnimationFillArray() //перед тем, как полетели. Нужно подгрузить текстуры
+        preloadTextureArrays()
+        //planeAnimationFillArray() //перед тем, как полетели. Нужно подгрузить текстуры
         motionManager.accelerometerUpdateInterval = 0.2 //как часто акселерометр должен обновлять ускорения
         motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { [unowned self] data, error in //data - это данные которые получим с сенсоров
             if let data = data { //если получили данные, извлекаем их в локальную дата
@@ -67,52 +68,35 @@ class PlayerPlain: SKSpriteNode {
         
         
     }
-    //MARK: - planeAnimationFillArray() - метод, наполнения массивов для анимации
-    private func planeAnimationFillArray() {
-        SKTextureAtlas.preloadTextureAtlases([SKTextureAtlas(named: "PlayerPlane")]) {
-        
-            self.leftTextureArrayAnimation = { //значение этого массива - это будет то, что возвращается из этого массива
-                
-                var array = [SKTexture]() //путсой массив
-                for i in stride(from: 13, through: 1, by: -1) { //перебираем от 13 до 1 с шагом - 1 (для левого поворота)
-                    let number = String(format: "%02d", i) //наше число должно быть преобразовано в строку со следующим видом
-                    let texture = SKTexture(imageNamed: "airplane_3ver2_\(number)")
-                    array.append(texture) //получился массив из текстур
+    //MARK: - preloadTextureArrays() - метод для подгрузки массивов
+    private func preloadTextureArrays() {
+        for i in 0...2 {
+            self.preloadArray(_stride: animationSpriteStrides[i]) { [unowned self] array in
+                switch i {
+                case 0: self.leftTextureArrayAnimation = array
+                case 1: self.rightTextureArrayAnimation = array
+                case 2: self.forwardTextureArrayAnimation = array
+                default: break
                 }
-                SKTexture.preload(array, withCompletionHandler: {
-                    print("preload is done")
-                })
-                return array
-            } ()
+            }
+        }
         
-            self.rightTextureArrayAnimation = {
-                
-                var array = [SKTexture]() //путсой массив
-                for i in stride(from: 13, through: 26, by: 1) {
-                    let number = String(format: "%02d", i) //наше число должно быть преобразовано в строку со следующим видом
-                    let texture = SKTexture(imageNamed: "airplane_3ver2_\(number)")
-                    array.append(texture) //получился массив из текстур
-                }
-                SKTexture.preload(array, withCompletionHandler: {
-                    print("preload is done")
-                })
-                return array
-            } ()
-            
-            self.forwardTextureArrayAnimation = {
-                
-                var array = [SKTexture]() //пустой массив
-                let texture = SKTexture(imageNamed: "airplane_3ver2_13")
-                array.append(texture) //получился массив из текстур
-                
-                SKTexture.preload(array, withCompletionHandler: {
-                    print("preload is done")
-                })
-                return array
-            } ()
-            
+    }
+    //MARK: - preloadArray() - метод для подгрузки массива
+    
+    
+    private func preloadArray(_stride: (Int, Int, Int), callBack: @escaping (_ array: [SKTexture]) -> Void) {
+        var array = [SKTexture]()
+        for i in stride(from: _stride.0, through: _stride.1, by: _stride.2) {
+            let number = String(format: "%02d", i)
+            let texture = SKTexture(imageNamed: "airplane_3ver2_\(number)")
+            array.append(texture)
+        }
+        SKTexture.preload(array) { //после того как текстуры подгружены, мы можем сохранить локальный массив в внешний
+            callBack(array)
         }
     }
+    
     //MARK: - movementDirectionsCheck() - позволяет определить в какую сторону запускать анимацию
     private func movementDirectionsCheck() {
         if xAcceleration > 0.02, moveDiraction != .right, stillTurning == false { //наклоняем телефон направо, и если мы еще не выполнили этот поворот направо, то мы его выполняем

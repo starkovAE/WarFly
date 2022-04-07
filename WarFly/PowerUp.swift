@@ -45,4 +45,4 @@ class PowerUp: SKSpriteNode {
     
     
     
-}
+}//закрывает класс

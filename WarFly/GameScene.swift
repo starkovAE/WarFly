@@ -18,7 +18,10 @@ var player: PlayerPlain!
         configurateStartScene()
         spawnClouds()
         spawnIsland()
-        player.performFly() //вызываем метод полета
+        let deadLine = DispatchTime.now() + .nanoseconds(1) //создали время, которое наступит через 10^-9 сек
+        DispatchQueue.main.asyncAfter(deadline: deadLine) { [unowned self] in //остраняем запуск на одну наносекунду
+            self.player.performFly() //вызываем метод полета
+        }
         
         let powerUp = PowerUp()
         powerUp.performRotation()
