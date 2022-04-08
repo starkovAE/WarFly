@@ -7,28 +7,54 @@
 
 import SpriteKit
 
-class PowerUp: SKSpriteNode {
-    
-    let initialSize = CGSize(width: 52, height: 52)
-    let textureAtlas = SKTextureAtlas(named: "GreenPowerUp")
-    var animationSpriteArray = [SKTexture]()
+class BluePowerUp: PowerUp {
     
     init() {
-        let greenTexture = textureAtlas.textureNamed("missle_green_01")
-        super.init(texture: greenTexture, color: .clear, size: initialSize)
-        self.name = "powerUp"
-        self.zPosition = 20
+        let textureAtlas = SKTextureAtlas(named: "BluePowerUp")
+        super.init(textureAtlas: textureAtlas)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+class GreenPowerUp: PowerUp {
+    init() {
+        let textureAtlas = SKTextureAtlas(named: "GreenPowerUp")
+        super.init(textureAtlas: textureAtlas)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class PowerUp: SKSpriteNode {
+    
+    let initialSize = CGSize(width: 52, height: 52)
+    let textureAtlas: SKTextureAtlas!
+    var textureNameBeginWith = "" //с чего начинается имя текстуры
+    var animationSpriteArray = [SKTexture]()
+    
+    init(textureAtlas: SKTextureAtlas) {
+        self.textureAtlas = textureAtlas
+        let textureName = textureAtlas.textureNames.sorted()[0] //не работает 
+        let texture = textureAtlas.textureNamed(textureName)
+        textureNameBeginWith = String(textureName.dropLast(6)) //откидыаем 6 символов из строки 01.png
+        super.init(texture: texture, color: .clear, size: initialSize)
+        self.setScale(0.7)
+        self.name = "powerUp"
+        self.zPosition = 20
+    }
+    
+    
     //MARK: - performRotation() - выполнение вращения (анимации)
     func performRotation() {
         
         for i in 1...15 {
             let number = String(format: "%02d", i)
-            animationSpriteArray.append(SKTexture(imageNamed: "missle_green_\(number)"))
+            animationSpriteArray.append(SKTexture(imageNamed: textureNameBeginWith + number.description))
         }
         //загружаем текстуры
         SKTexture.preload(animationSpriteArray) { //этот код выполнится после того как массив animationSpriteArray загрузится
@@ -38,8 +64,11 @@ class PowerUp: SKSpriteNode {
         
             
         }
+        
     }
-    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     

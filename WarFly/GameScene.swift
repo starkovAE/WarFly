@@ -30,7 +30,7 @@ var player: PlayerPlain!
     //MARK: - createPowerUp()
     private func spawnPowerUp() {
         //создаем powerUp
-        let powerUp = PowerUp()
+        let powerUp = BluePowerUp()
         powerUp.performRotation()
         powerUp.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
         self.addChild(powerUp)

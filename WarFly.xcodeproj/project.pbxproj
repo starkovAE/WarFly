@@ -24,6 +24,7 @@
 		3F4B078D27FE183E00735244 /* PlayerPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B078C27FE183E00735244 /* PlayerPlain.swift */; };
 		3F4B078F27FE18F500735244 /* PlayerPlane.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B078E27FE18F500735244 /* PlayerPlane.atlas */; };
 		3FFCDA7328006BF90014EA25 /* Enemy_2.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3FFCDA7228006BF90014EA25 /* Enemy_2.atlas */; };
+		3FFCDA782800897C0014EA25 /* BluePowerUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3FFCDA772800897C0014EA25 /* BluePowerUp.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		3F4B078C27FE183E00735244 /* PlayerPlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPlain.swift; sourceTree = "<group>"; };
 		3F4B078E27FE18F500735244 /* PlayerPlane.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerPlane.atlas; sourceTree = "<group>"; };
 		3FFCDA7228006BF90014EA25 /* Enemy_2.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Enemy_2.atlas; sourceTree = "<group>"; };
+		3FFCDA772800897C0014EA25 /* BluePowerUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = BluePowerUp.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				3F4B077927FDF38000735244 /* Main.storyboard */,
 				3F4B078E27FE18F500735244 /* PlayerPlane.atlas */,
 				3F36805027FF7EB900E9AD30 /* GreenPowerUp.atlas */,
+				3FFCDA772800897C0014EA25 /* BluePowerUp.atlas */,
 				3F36805627FF895B00E9AD30 /* Enemy_1.atlas */,
 				3FFCDA7228006BF90014EA25 /* Enemy_2.atlas */,
 				3F4B077C27FDF38100735244 /* Assets.xcassets */,
@@ -170,6 +173,7 @@
 				3F36805127FF7EB900E9AD30 /* GreenPowerUp.atlas in Resources */,
 				3F4B078F27FE18F500735244 /* PlayerPlane.atlas in Resources */,
 				3F4B077D27FDF38100735244 /* Assets.xcassets in Resources */,
+				3FFCDA782800897C0014EA25 /* BluePowerUp.atlas in Resources */,
 				3F4B078027FDF38100735244 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
