@@ -23,6 +23,7 @@
 		3F4B078B27FE0CD100735244 /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B078A27FE0CD100735244 /* Cloud.swift */; };
 		3F4B078D27FE183E00735244 /* PlayerPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B078C27FE183E00735244 /* PlayerPlain.swift */; };
 		3F4B078F27FE18F500735244 /* PlayerPlane.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3F4B078E27FE18F500735244 /* PlayerPlane.atlas */; };
+		3FFCDA7328006BF90014EA25 /* Enemy_2.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3FFCDA7228006BF90014EA25 /* Enemy_2.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		3F4B078A27FE0CD100735244 /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		3F4B078C27FE183E00735244 /* PlayerPlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPlain.swift; sourceTree = "<group>"; };
 		3F4B078E27FE18F500735244 /* PlayerPlane.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerPlane.atlas; sourceTree = "<group>"; };
+		3FFCDA7228006BF90014EA25 /* Enemy_2.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Enemy_2.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				3F4B078E27FE18F500735244 /* PlayerPlane.atlas */,
 				3F36805027FF7EB900E9AD30 /* GreenPowerUp.atlas */,
 				3F36805627FF895B00E9AD30 /* Enemy_1.atlas */,
+				3FFCDA7228006BF90014EA25 /* Enemy_2.atlas */,
 				3F4B077C27FDF38100735244 /* Assets.xcassets */,
 				3F4B077E27FDF38100735244 /* LaunchScreen.storyboard */,
 			);
@@ -161,6 +164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FFCDA7328006BF90014EA25 /* Enemy_2.atlas in Resources */,
 				3F36805727FF895B00E9AD30 /* Enemy_1.atlas in Resources */,
 				3F4B077B27FDF38000735244 /* Main.storyboard in Resources */,
 				3F36805127FF7EB900E9AD30 /* GreenPowerUp.atlas in Resources */,
