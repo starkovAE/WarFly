@@ -22,22 +22,39 @@ var player: PlayerPlain!
         DispatchQueue.main.asyncAfter(deadline: deadLine) { [unowned self] in //остраняем запуск на одну наносекунду
             self.player.performFly() //вызываем метод полета
         }
+        spawnPowerUp()
+        spawnEnemy(count: 5)
+       
+        }
+    
+    //MARK: - createPowerUp()
+    private func spawnPowerUp() {
         //создаем powerUp
         let powerUp = PowerUp()
         powerUp.performRotation()
         powerUp.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
         self.addChild(powerUp)
-        
+    }
+    
+    //MARK: - spawnEnemy() - (пер.) порождать врагов
+    private func spawnEnemy(count: Int) {
         //создаем врага
         let enemyTextureAtlas = SKTextureAtlas(named: "Enemy_1")
         SKTextureAtlas.preloadTextureAtlases([enemyTextureAtlas]) {
-            Enemy.textureAtlas = enemyTextureAtlas //используем атлас 
-            let enemy = Enemy()
-            enemy.position = CGPoint(x: self.size.width / 2, y: self.size.height * 2 / 3)
-            self.addChild(enemy)
+            Enemy.textureAtlas = enemyTextureAtlas //используем атлас
+            let waitAction = SKAction.wait(forDuration: 1.0) //интервал ожидания порождения врагов
+            let spawnEnemy = SKAction.run {
+                let enemy = Enemy()
+                enemy.position = CGPoint(x: self.size.width / 2, y: self.size.height + 110)
+                self.addChild(enemy)
+                enemy.flySpiral()
+            }
+            let spawnAction = SKAction.sequence([waitAction, spawnEnemy])
+            let repeatAction = SKAction.repeat(spawnAction, count: count)
+            self.run(repeatAction)
         }
-       
-        }
+
+    }
 //MARK: - configurateStartScene()
     private func configurateStartScene() {
         let sprite = SKSpriteNode(color: .blue, size: CGSize(width: 100, height: 100))
@@ -104,8 +121,8 @@ var player: PlayerPlain!
         
         player.checkPosition() //вызываем метод
         
-        enumerateChildNodes(withName: "backgroundSprite") { node, stop in //node - это сам объхект, который мы получили при переборе, stop - это флаг, который возвращает либо тру либо фолс
-            if node.position.y < -199 {
+        enumerateChildNodes(withName: "Sprite") { node, stop in //node - это сам объхект, который мы получили при переборе, stop - это флаг, который возвращает либо тру либо фолс
+            if node.position.y < -100 {
                 node.removeFromParent() //все node (облака и острова) ниже нуля будут удаляться
             }
         }

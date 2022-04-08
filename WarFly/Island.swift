@@ -17,7 +17,7 @@ final class Island: SKSpriteNode, GameBackgroundSpriteable {
         island.position = point ?? randomPoint()
         island.zPosition = 1 //zPosition - величина отностельно родителя (выше фона)
         island.run(rotateForRandomAngle())
-        island.name = "backgroundSprite" //у этих спрайтов теперь есть имя
+        island.name = "Sprite" //у этих спрайтов теперь есть имя
         island.anchorPoint = CGPoint(x: 0.5, y: 1.0) //хотим, чтобы когда верхняя граница node уходит за пределы экрана, тогда он сможет удалилться
         island.run(move(from:  island.position)) //вызвали метод
         return island

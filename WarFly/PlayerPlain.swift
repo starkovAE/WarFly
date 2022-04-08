@@ -53,7 +53,7 @@ class PlayerPlain: SKSpriteNode {
             if let data = data { //если получили данные, извлекаем их в локальную дата
                 let acceleration = data.acceleration
                 self.xAcceleration = CGFloat(acceleration.x) * 0.7 + self.xAcceleration * 0.3 //получаем данные акселерометра и немного убавляем их (делаем их не линейными, немного искажаем)
-                print(self.xAcceleration)
+              //  print(self.xAcceleration)
             }
         }
         let plainWaitAction = SKAction.wait(forDuration: 1.0)

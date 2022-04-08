@@ -15,7 +15,7 @@ final class Cloud: SKSpriteNode, GameBackgroundSpriteable {
         cloud.setScale(randomScaleFactor)
         cloud.position = point ?? randomPoint()
         cloud.zPosition = 10 //чтобы был зазор, вдруг чего добавим
-        cloud.name = "backgroundSprite"
+        cloud.name = "Sprite"
         cloud.anchorPoint = CGPoint(x: 0.5, y: 1.0)
         cloud.run(move(from: cloud.position))
         
