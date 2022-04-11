@@ -30,7 +30,7 @@ class PlayerPlain: SKSpriteNode {
         let playerPlain = PlayerPlain(texture: playerPlaneTexture)
         playerPlain.setScale(0.5) //масштаб
         playerPlain.position = point
-        playerPlain.zPosition = 20
+        playerPlain.zPosition = 40
         return playerPlain
     }
   //MARK: - checkPosition() - отвечает за  проверку позции самолета

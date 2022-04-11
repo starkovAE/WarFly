@@ -158,10 +158,27 @@ var player: PlayerPlain!
             if node.position.y <= -100 {
                 node.removeFromParent() //все node (облака и острова) ниже нуля будут удаляться
                 
-                if node.isKind(of: PowerUp.self) { //чтобы отследить удаление power up
-                    print("power up is remove from scene")
-                }
+        
             }
         }
+        //Для удаления выстрела (так как он летит снизу вверх)
+        enumerateChildNodes(withName: "shotSprite") { node, stop in //node - это сам объхект, который мы получили при переборе, stop - это флаг, который возвращает либо тру либо фолс
+            if node.position.y >= self.size.height + 100 {
+                node.removeFromParent() //все node (облака и острова) ниже нуля будут удаляться
+                
+               
+            }
+        }
+    }
+    //MARK: - playerFire() 
+    private func playerFire() {
+        let shot = YellowShot()
+        shot.position = self.player.position //позиция выстрела будет совпадать с центром самолета
+        shot.startMovement()
+        self.addChild(shot)
+    }
+    //MARK: -touchesBegan() -  Что мы должны делать, когда зафиксированы прикосновения к экрану
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        playerFire()
     }
 }
