@@ -30,10 +30,23 @@ var player: PlayerPlain!
     //MARK: - createPowerUp()
     private func spawnPowerUp() {
         //создаем powerUp
-        let powerUp = BluePowerUp()
-        powerUp.performRotation()
-        powerUp.position = CGPoint(x: self.size.width / 2, y: self.size.height / 2)
-        self.addChild(powerUp)
+ 
+        let spawnAction = SKAction.run {
+            let randomNumber = Int(arc4random_uniform(2))
+            let powerUp = randomNumber == 1 ? BluePowerUp() : GreenPowerUp()
+            let randomPositionX = arc4random_uniform(UInt32(self.size.width - 30))
+            
+            powerUp.position = CGPoint(x: CGFloat(randomPositionX), y: self.size.height + 100) //происходит зарождения powerUp. на рандомной позции по оси х и по у = высота экрана + 100
+            powerUp.startMovement()
+            self.addChild(powerUp)
+        }
+        
+        let randomTimeSpawn = Double(arc4random_uniform(11) + 10) //создаются от 0 до 10 и потом еще + 10
+        let waitAction = SKAction.wait(forDuration: randomTimeSpawn)
+        
+        self.run(SKAction.repeatForever(SKAction.sequence([spawnAction, waitAction])))
+        
+      
     }
     
     //MARK: - spawnEnemies()
@@ -142,8 +155,12 @@ var player: PlayerPlain!
         player.checkPosition() //вызываем метод
         
         enumerateChildNodes(withName: "Sprite") { node, stop in //node - это сам объхект, который мы получили при переборе, stop - это флаг, который возвращает либо тру либо фолс
-            if node.position.y < -100 {
+            if node.position.y <= -100 {
                 node.removeFromParent() //все node (облака и острова) ниже нуля будут удаляться
+                
+                if node.isKind(of: PowerUp.self) { //чтобы отследить удаление power up
+                    print("power up is remove from scene")
+                }
             }
         }
     }

@@ -7,35 +7,12 @@
 
 import SpriteKit
 
-class BluePowerUp: PowerUp {
-    
-    init() {
-        let textureAtlas = SKTextureAtlas(named: "BluePowerUp")
-        super.init(textureAtlas: textureAtlas)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-class GreenPowerUp: PowerUp {
-    init() {
-        let textureAtlas = SKTextureAtlas(named: "GreenPowerUp")
-        super.init(textureAtlas: textureAtlas)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
 class PowerUp: SKSpriteNode {
     
-    let initialSize = CGSize(width: 52, height: 52)
-    let textureAtlas: SKTextureAtlas!
-    var textureNameBeginWith = "" //с чего начинается имя текстуры
-    var animationSpriteArray = [SKTexture]()
+    private let initialSize = CGSize(width: 52, height: 52)
+    private let textureAtlas: SKTextureAtlas!
+    private var textureNameBeginWith = "" //с чего начинается имя текстуры
+    private var animationSpriteArray = [SKTexture]()
     
     init(textureAtlas: SKTextureAtlas) {
         self.textureAtlas = textureAtlas
@@ -44,13 +21,21 @@ class PowerUp: SKSpriteNode {
         textureNameBeginWith = String(textureName.dropLast(6)) //откидыаем 6 символов из строки 01.png
         super.init(texture: texture, color: .clear, size: initialSize)
         self.setScale(0.7)
-        self.name = "powerUp"
+        self.name = "Sprite"
         self.zPosition = 20
+    }
+    
+    //MARK: - startMovement() - выполнение вертикального движения
+    func startMovement() {
+        performRotation()
+        
+        let moveForward = SKAction.moveTo(y: -100, duration: 5) //движение в течении 5 секунд от заданой точки до у равному -100
+        self.run(moveForward)
     }
     
     
     //MARK: - performRotation() - выполнение вращения (анимации)
-    func performRotation() {
+  private func performRotation() {
         
         for i in 1...15 {
             let number = String(format: "%02d", i)
