@@ -23,9 +23,8 @@ var player: PlayerPlain!
             self.player.performFly() //вызываем метод полета
         }
         spawnPowerUp()
-       // spawnEnemy(count: 5)
-       spawnEmenies()
-        }
+        spawnEmenies()
+    }
     
     //MARK: - createPowerUp()
     private func spawnPowerUp() {
@@ -64,8 +63,8 @@ var player: PlayerPlain!
     //MARK: - spawnEnemy() - (пер.) порождать врагов
     private func spawnSpiralOfEnemies() {
         //создаем врага
-        let enemyTextureAtlas1 = SKTextureAtlas(named: "Enemy_1")
-        let enemyTextureAtlas2 = SKTextureAtlas(named: "Enemy_2")
+        let enemyTextureAtlas1 = Assets.shared.enemy_1Atlas
+        let enemyTextureAtlas2 = Assets.shared.enemy_2Atlas
         SKTextureAtlas.preloadTextureAtlases([enemyTextureAtlas1, enemyTextureAtlas2]) { [unowned self] in
             
             let randomNumber = Int(arc4random_uniform(2)) //рандомное число. Либо 0 либо 1

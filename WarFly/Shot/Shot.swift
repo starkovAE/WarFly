@@ -22,7 +22,7 @@ class Shot: SKSpriteNode {
         let texture = textureAtlas.textureNamed(textureName)
         textureNameBeginWith = String(textureName.dropLast(6)) //откидыаем 6 символов из строки 01.png
         super.init(texture: texture, color: .clear, size: initialSize)
-        self.setScale(0.7)
+        self.setScale(0.3)
         self.name = "shotSprite"
         self.zPosition = 30 //чтобы встрел были над всеми, кроме самолета 
     }

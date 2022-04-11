@@ -26,7 +26,8 @@ class PlayerPlain: SKSpriteNode {
     
     static func populate(at point: CGPoint) -> PlayerPlain {
         //текстура может меняться, а изображение нет
-        let playerPlaneTexture = SKTexture(imageNamed: "airplane_3ver2_13")
+        let atlas = Assets.shared.playerPlaneAtlas
+        let playerPlaneTexture = atlas.textureNamed("airplane_3ver2_13")
         let playerPlain = PlayerPlain(texture: playerPlaneTexture)
         playerPlain.setScale(0.5) //масштаб
         playerPlain.position = point
