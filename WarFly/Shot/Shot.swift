@@ -24,7 +24,13 @@ class Shot: SKSpriteNode {
         super.init(texture: texture, color: .clear, size: initialSize)
         self.setScale(0.3)
         self.name = "shotSprite"
-        self.zPosition = 30 //чтобы встрел были над всеми, кроме самолета 
+        self.zPosition = 30 //чтобы встрел были над всеми, кроме самолета
+        
+        self.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: self.size)
+        self.physicsBody?.isDynamic = false
+        self.physicsBody?.collisionBitMask = BitMaskCategory.shot
+        self.physicsBody?.collisionBitMask = BitMaskCategory.enemy
+        self.physicsBody?.contactTestBitMask = BitMaskCategory.enemy
     }
     
     //MARK: - startMovement() - выполнение вертикального движения

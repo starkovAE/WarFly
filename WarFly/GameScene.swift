@@ -14,6 +14,9 @@ class GameScene: SKScene {
     //создаем игрока
 var player: PlayerPlain!
     override func didMove(to view: SKView) {
+        physicsWorld.contactDelegate = self
+        physicsWorld.gravity = CGVector.zero //силу гравитации приравниванием к 0, чтобы самолеты не падали
+        
         
         configurateStartScene()
         spawnClouds()
@@ -179,5 +182,14 @@ var player: PlayerPlain!
     //MARK: -touchesBegan() -  Что мы должны делать, когда зафиксированы прикосновения к экрану
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         playerFire()
+    }
+}// закрвыает класс
+
+extension GameScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        print("contact detected")
+    }
+    func didEnd(_ contact: SKPhysicsContact) {
+        
     }
 }

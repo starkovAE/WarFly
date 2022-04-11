@@ -23,7 +23,7 @@ class PlayerPlain: SKSpriteNode {
     var moveDiraction: TurnDiraction = .none //(пер.)движение направления
     var stillTurning = false //начался ли у нас уже поворот
     let animationSpriteStrides = [(13, 1, -1), (13, 26, 1), (13, 13, 1)] //массив с кортежами
-    
+    //MARK: - populate()
     static func populate(at point: CGPoint) -> PlayerPlain {
         //текстура может меняться, а изображение нет
         let atlas = Assets.shared.playerPlaneAtlas
@@ -32,6 +32,13 @@ class PlayerPlain: SKSpriteNode {
         playerPlain.setScale(0.5) //масштаб
         playerPlain.position = point
         playerPlain.zPosition = 40
+       //создаем физическое тело - такое свойство, которое позволяет сталкивать объекты
+        playerPlain.physicsBody = SKPhysicsBody(texture: playerPlaneTexture, alphaThreshold: 0.5, size: playerPlain.size)
+        playerPlain.physicsBody?.isDynamic = false // isDynamic - мы являемся стеной (мы не динамичны)
+        playerPlain.physicsBody?.collisionBitMask = BitMaskCategory.player //присвоили битовую маску игрока
+        playerPlain.physicsBody?.collisionBitMask = BitMaskCategory.enemy | BitMaskCategory.powerUp // битовые маски других  объектов
+        playerPlain.physicsBody?.contactTestBitMask = BitMaskCategory.enemy | BitMaskCategory.powerUp // с кем будем контактировать
+        
         return playerPlain
     }
   //MARK: - checkPosition() - отвечает за  проверку позции самолета
