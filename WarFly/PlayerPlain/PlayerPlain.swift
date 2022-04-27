@@ -33,6 +33,27 @@ class PlayerPlain: SKSpriteNode {
         playerPlain.position = point
         playerPlain.zPosition = 40
        //создаем физическое тело - такое свойство, которое позволяет сталкивать объекты
+        //MARK: - еще один способ создания физического тела:
+//        let offsetX = playerPlain.frame.size.width * playerPlain.anchorPoint.x  // в горизонтальном виде
+//        let offsetY = playerPlain.frame.size.height * playerPlain.anchorPoint.y
+//
+//        //создание тракетории
+//        let path = CGMutablePath()
+//        path.move(to: CGPoint(x: 57 - offsetX, y: 84 - offsetY)) //куда двигаемся
+//        path.move(to: CGPoint(x: 66 - offsetX, y: 83 - offsetY))
+//        path.move(to: CGPoint(x: 71 - offsetX,y: 99 - offsetY))
+//        path.move(to: CGPoint(x: 78 - offsetX,y: 98 - offsetY))
+//        path.move(to: CGPoint(x: 85 - offsetX,y: 85 - offsetY))
+//        path.move(to: CGPoint(x: 88 - offsetX, y: 84 - offsetY))
+//        path.move(to: CGPoint(x: 89 - offsetX, y: 90 - offsetY))
+//        path.move(to: CGPoint(x: 93 - offsetX, y: 86 - offsetY))
+//        path.move(to: CGPoint(x: 94 - offsetX, y: 85 - offsetY))
+//        path.move(to: CGPoint(x: 104 - offsetX, y: 79 - offsetY))
+//        path.move(to: CGPoint(x: 105 - offsetX,y: 81 - offsetY))
+//        path.closeSubpath() //завершение траектории
+//        playerPlain.physicsBody = SKPhysicsBody(polygonFrom: path)
+      
+        
         playerPlain.physicsBody = SKPhysicsBody(texture: playerPlaneTexture, alphaThreshold: 0.5, size: playerPlain.size)
         playerPlain.physicsBody?.isDynamic = false // isDynamic - мы являемся стеной (мы не динамичны)
         playerPlain.physicsBody?.collisionBitMask = BitMaskCategory.player //присвоили битовую маску игрока
