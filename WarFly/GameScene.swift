@@ -186,8 +186,26 @@ var player: PlayerPlain!
 }// закрвыает класс
 
 extension GameScene: SKPhysicsContactDelegate {
+    //MARK: - didBegin() -  данный метод регистриует столкновения
     func didBegin(_ contact: SKPhysicsContact) {
-        print("contact detected")
+      
+        let bodyA = contact.bodyA.categoryBitMask //какие ьитовые маски сталкиваются
+        let bodyB = contact.bodyB.categoryBitMask
+        
+        let player = BitMaskCategory.player //присваиваем битовые маски 
+        let enemy = BitMaskCategory.enemy
+        let shot = BitMaskCategory.shot
+        let powerUp = BitMaskCategory.powerUp
+        
+        if bodyA == player && bodyB == enemy || bodyB == player && bodyA == enemy { //самолет и враг
+            print("enemy vs player")
+        } else if bodyA == player && bodyB == powerUp || bodyA == player && bodyB == powerUp  {
+            print("powerUp vs player")
+        } else if bodyA == shot && bodyB == enemy || bodyA == shot && bodyB == enemy {
+            print("enemy vs shot")
+        }
+        
+        
     }
     func didEnd(_ contact: SKPhysicsContact) {
         
