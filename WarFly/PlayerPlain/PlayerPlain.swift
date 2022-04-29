@@ -52,13 +52,14 @@ class PlayerPlain: SKSpriteNode {
 //        path.move(to: CGPoint(x: 105 - offsetX,y: 81 - offsetY))
 //        path.closeSubpath() //завершение траектории
 //        playerPlain.physicsBody = SKPhysicsBody(polygonFrom: path)
+        //
       
         
         playerPlain.physicsBody = SKPhysicsBody(texture: playerPlaneTexture, alphaThreshold: 0.5, size: playerPlain.size)
-        playerPlain.physicsBody?.isDynamic = false // isDynamic - мы являемся стеной (мы не динамичны)
-        playerPlain.physicsBody?.collisionBitMask = BitMaskCategory.player //присвоили битовую маску игрока
-        playerPlain.physicsBody?.collisionBitMask = BitMaskCategory.enemy | BitMaskCategory.powerUp // битовые маски других  объектов
-        playerPlain.physicsBody?.contactTestBitMask = BitMaskCategory.enemy | BitMaskCategory.powerUp // с кем будем контактировать
+        playerPlain.physicsBody?.isDynamic = false
+        playerPlain.physicsBody?.categoryBitMask = BitMaskCategory.player.rawValue
+        playerPlain.physicsBody?.collisionBitMask = BitMaskCategory.enemy.rawValue | BitMaskCategory.powerUp.rawValue
+        playerPlain.physicsBody?.contactTestBitMask = BitMaskCategory.enemy.rawValue | BitMaskCategory.powerUp.rawValue
         
         return playerPlain
     }

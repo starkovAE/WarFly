@@ -22,9 +22,10 @@ class Enemy: SKSpriteNode {
         
         self.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: self.size)
         self.physicsBody?.isDynamic = true
-        self.physicsBody?.collisionBitMask = BitMaskCategory.enemy
-        self.physicsBody?.collisionBitMask = BitMaskCategory.player | BitMaskCategory.shot
-        self.physicsBody?.contactTestBitMask = BitMaskCategory.player | BitMaskCategory.shot
+        self.physicsBody?.categoryBitMask = BitMaskCategory.enemy.rawValue
+        self.physicsBody?.collisionBitMask = BitMaskCategory.player.rawValue | BitMaskCategory.shot.rawValue
+        self.physicsBody?.contactTestBitMask = BitMaskCategory.player.rawValue | BitMaskCategory.shot.rawValue
+
         
     }
     //MARK: - flySpiral() - метод, полета по спирали

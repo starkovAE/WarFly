@@ -26,9 +26,9 @@ class PowerUp: SKSpriteNode {
         
         self.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: self.size)
         self.physicsBody?.isDynamic = true
-        self.physicsBody?.collisionBitMask = BitMaskCategory.powerUp
-        self.physicsBody?.collisionBitMask = BitMaskCategory.player
-        self.physicsBody?.contactTestBitMask = BitMaskCategory.player 
+        self.physicsBody?.categoryBitMask = BitMaskCategory.powerUp.rawValue
+        self.physicsBody?.collisionBitMask = BitMaskCategory.player.rawValue
+        self.physicsBody?.contactTestBitMask = BitMaskCategory.player.rawValue
     }
     
     //MARK: - startMovement() - выполнение вертикального движения

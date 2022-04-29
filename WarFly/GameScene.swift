@@ -186,9 +186,20 @@ var player: PlayerPlain!
 }// закрвыает класс
 
 extension GameScene: SKPhysicsContactDelegate {
-    //MARK: - didBegin() -  данный метод регистриует столкновения
     func didBegin(_ contact: SKPhysicsContact) {
-      
+
+        let contactCategory: BitMaskCategory  = [contact.bodyA.category, contact.bodyB.category]
+        switch contactCategory {
+        case[.enemy, .player]: print("enemy vs player")
+        case[.powerUp, .player]: print("powerUp vs player")
+        case[.enemy, .shot]: print("enemy vs shot")
+        default:
+            preconditionFailure("Unable to detect collision category")
+
+        }
+    }
+   
+      /* CТАРЫЙ КОД:
         let bodyA = contact.bodyA.categoryBitMask //какие ьитовые маски сталкиваются
         let bodyB = contact.bodyB.categoryBitMask
         
@@ -203,10 +214,10 @@ extension GameScene: SKPhysicsContactDelegate {
             print("powerUp vs player")
         } else if bodyA == shot && bodyB == enemy || bodyA == shot && bodyB == enemy {
             print("enemy vs shot")
-        }
+        }*/
         
         
-    }
+   
     func didEnd(_ contact: SKPhysicsContact) {
         
     }
