@@ -10,7 +10,7 @@ import SpriteKit
 //MARK: - Этот класс будет СинглТоном - это такой класс, который имеет всего один экземпляр
 class Assets {
 static let shared = Assets()
-    
+    var isLoaded = false //загружено или нет
     let playerPlaneAtlas = SKTextureAtlas(named: "PlayerPlane")
     let greenPowerUpAtlas = SKTextureAtlas(named: "GreenPowerUp")
     let bluePowerUpAtlas = SKTextureAtlas(named: "BluePowerUp")
