@@ -11,6 +11,7 @@ class MenuScene: SKScene {
     
 //MARK: - didMove(to view:)
     override func didMove(to view: SKView) {
+        Assets.shared.preloadAssets() // подгружаем атласы 
         self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
         let texture = SKTexture(imageNamed: "play")
         let button = SKSpriteNode(texture: texture)
