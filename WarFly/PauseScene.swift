@@ -1,28 +1,24 @@
 //
-//  MenuScene.swift
+//  PauseScene.swift
 //  WarFly
 //
-//  Created by Александр Старков on 11.04.2022.
+//  Created by Александр Старков on 29.04.2022.
 //
 
 import SpriteKit
 
-class MenuScene: SKScene {
-    
-//MARK: - didMove(to view:)
+class PauseScene: SKScene {
     override func didMove(to view: SKView) {
-        if Assets.shared.isLoaded {
-            Assets.shared.preloadAssets() // подгружаем атласы
-            Assets.shared.isLoaded = true
-        }
     
         self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
-        let header = SKSpriteNode(imageNamed: "header1")
+        
+        
+        let header = ButtonNode(titled: "pause", backgroundName: "header_background")
         header.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 150)
         self.addChild(header)
         
-        //Нормальная запись 
-        let titles = ["play", "options", "best"]
+        //Нормальная запись
+        let titles = ["restart", "options", "resume"]
         for (index, title) in titles.enumerated() {
             let button = ButtonNode(titled: title, backgroundName: "button_background")
             button.position = CGPoint(x: self.frame.midX, y: self.frame.midY - CGFloat(100 * index))
@@ -38,7 +34,7 @@ class MenuScene: SKScene {
         guard let location = touches.first?.location(in: self) else { return }//касание внутри этой сцены (self)
         let node = self.atPoint(location)
         
-        if node.name == "play" { //если свойство имени равно  = runButton
+        if node.name == "restart" { //если свойство имени равно  = runButton
             let transition = SKTransition.crossFade(withDuration: 1.0) //осуществляем переход - transition,  (crossFade - использует эффект расстворения и переходит на другую сцену)
             let gameScene = GameScene(size: self.size)
             gameScene.scaleMode = .aspectFill
@@ -48,3 +44,5 @@ class MenuScene: SKScene {
     
     
 }
+
+

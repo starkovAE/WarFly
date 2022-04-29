@@ -188,7 +188,18 @@ class GameScene: SKScene {
     }
     //MARK: -touchesBegan() -  Что мы должны делать, когда зафиксированы прикосновения к экрану
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        playerFire()
+            guard let location = touches.first?.location(in: self) else { return }//касание внутри этой сцены (self)
+            let node = self.atPoint(location)
+            
+            if node.name == "pause" { //если свойство имени равно  = runButton
+                let transition = SKTransition.doorway(withDuration: 1.0)
+                let pauseScene = PauseScene(size: self.size)
+                pauseScene.scaleMode = .aspectFill
+                self.scene?.view?.presentScene(pauseScene, transition: transition) //осуществляем сам переход
+            } else {
+                playerFire()
+            }
+      
     }
 }// закрвыает класс
 
