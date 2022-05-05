@@ -16,17 +16,20 @@ class GameScene: SKScene {
     private var player: PlayerPlain!
     private  let hud = HUD()
     private let screenSize = UIScreen.main.bounds.size
+   // private var pauseNode = SKNode()
    
     //MARK: - didMove(to View:)
     override func didMove(to view: SKView) {
+        
+       // addChild(pauseNode) - использовали для того, чтобы поставить объект на паузу
+        self.scene?.isPaused = false
+        guard sceneManager.gameScene == nil else { return } //если тру (значит сцена еще не создана) - идет дальше по коду, если false (значит сцена уже есть) - выходит из метода
+        sceneManager.gameScene = self //произошла загрузка текущей сцены (присвоили свойству gameScene - текущую сцену)
+        
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector.zero //силу гравитации приравниванием к 0, чтобы самолеты не падали
         //Проверяем существует ли данная сцена уже?
-        guard sceneManager.gameScene == nil else { return } //если тру (значит сцена еще не создана) - идет дальше по коду, если false (значит сцена уже есть) - выходит из метода
-        
-        sceneManager.gameScene = self //произошла загрузка текущей сцены (присвоили свойству gameScene - текущую сцену)
-        
-        
+     
         configurateStartScene()
         spawnClouds()
         spawnIsland()
@@ -52,6 +55,7 @@ class GameScene: SKScene {
             
             powerUp.position = CGPoint(x: CGFloat(randomPositionX), y: self.size.height + 100) //происходит зарождения powerUp. на рандомной позции по оси х и по у = высота экрана + 100
             powerUp.startMovement()
+           // self.pauseNode.addChild(powerUp)
             self.addChild(powerUp)
         }
         
@@ -200,8 +204,13 @@ class GameScene: SKScene {
                 let transition = SKTransition.doorway(withDuration: 1.0)
                 let pauseScene = PauseScene(size: self.size)
                 pauseScene.scaleMode = .aspectFill
+                sceneManager.gameScene = self
+                self.scene?.isPaused = true
                 self.scene?.view?.presentScene(pauseScene, transition: transition) //осуществляем сам переход
+                
+              //  pauseNode.isPaused = true - если хотим поставить определенный объект на паузу
             } else {
+        
                 playerFire()
             }
       

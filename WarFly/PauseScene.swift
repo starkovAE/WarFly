@@ -31,6 +31,15 @@ class PauseScene: SKScene {
         }
         
     }
+    //MARK: - update() - метод обновления сцены (60 раз в секунду)
+    override func update(_ currentTime: TimeInterval) {
+        if let gameScene = sceneManager.gameScene {
+            if !gameScene.isPaused  { //если это равно false
+                gameScene.isPaused = true //сделаем тру
+                print("changedd")
+            }
+        }
+    }
     
     //MARK: - touchesBegan() метод касаний
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
