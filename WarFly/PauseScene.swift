@@ -8,8 +8,11 @@
 import SpriteKit
 
 class PauseScene: SKScene {
-    override func didMove(to view: SKView) {
     
+    let sceneManager = SceneManager.shared
+    
+    override func didMove(to view: SKView) {
+       
         self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
         
         
@@ -35,8 +38,16 @@ class PauseScene: SKScene {
         let node = self.atPoint(location)
         
         if node.name == "restart" { //если свойство имени равно  = runButton
+            sceneManager.gameScene = nil //удаляем из gameScene - нашу сцену 
             let transition = SKTransition.crossFade(withDuration: 1.0) //осуществляем переход - transition,  (crossFade - использует эффект расстворения и переходит на другую сцену)
             let gameScene = GameScene(size: self.size)
+            gameScene.scaleMode = .aspectFill
+            self.scene?.view?.presentScene(gameScene, transition: transition) //осуществляем сам переход
+            
+        } else if node.name == "resume" { //если имя соответсует resume - мы должны вернуться на старую сцену
+            
+            let transition = SKTransition.crossFade(withDuration: 1.0) //осуществляем переход - transition,  (crossFade - использует эффект расстворения и переходит на другую сцену)
+            guard let gameScene = sceneManager.gameScene else { return }
             gameScene.scaleMode = .aspectFill
             self.scene?.view?.presentScene(gameScene, transition: transition) //осуществляем сам переход
         }

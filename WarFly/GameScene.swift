@@ -11,6 +11,7 @@ import GameplayKit
 
 class GameScene: SKScene {
 
+    let sceneManager = SceneManager.shared //получили единственный экземпляр
     //создаем игрока
     private var player: PlayerPlain!
     private  let hud = HUD()
@@ -20,6 +21,10 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector.zero //силу гравитации приравниванием к 0, чтобы самолеты не падали
+        //Проверяем существует ли данная сцена уже?
+        guard sceneManager.gameScene == nil else { return } //если тру (значит сцена еще не создана) - идет дальше по коду, если false (значит сцена уже есть) - выходит из метода
+        
+        sceneManager.gameScene = self //произошла загрузка текущей сцены (присвоили свойству gameScene - текущую сцену)
         
         
         configurateStartScene()
