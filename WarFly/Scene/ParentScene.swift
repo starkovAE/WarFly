@@ -22,8 +22,14 @@ class ParentScene: SKScene {
         
         
     }
-    func setColorBackground(redColor red: CGFloat, greenColor green: CGFloat, blueColor blue: CGFloat, alphaPosition alpha: CGFloat ) {
-        self.backgroundColor = SKColor(red: red, green: green, blue: blue, alpha: alpha)
+
+    override init(size: CGSize) {
+        super.init(size: size)
+        backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }

@@ -15,8 +15,6 @@ class MenuScene: ParentScene {
             Assets.shared.preloadAssets() // подгружаем атласы
             Assets.shared.isLoaded = true
         }
-    
-        setColorBackground(redColor: 0.15, greenColor: 0.15, blueColor: 0.3, alphaPosition: 1.0)
         setHeader(withName:nil, andBackground: "header1")
 
         //Нормальная запись 

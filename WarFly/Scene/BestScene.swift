@@ -11,25 +11,32 @@ class BestScene: ParentScene {
 
 //    let score = HUD()
 //    "\(score.scoreLabel)"
-    
+    var places = [10, 100, 10000]
     override func didMove(to view: SKView) {
-        
-        setColorBackground(redColor: 0.15, greenColor: 0.15, blueColor: 0.3, alphaPosition: 1.0)
-        
+ 
         setHeader(withName: "best", andBackground: "header_background")
        
-        let back = ButtonNode(titled: "back", backgroundName: "button_background")
-        back.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 100) //размещаем кнопку на экране
-        back.name = "back" //даем имя
-        back.label.name = "back"
-        addChild(back) //добавляем на сцену
+        let titles = ["back"]
+        for (index, title) in titles.enumerated() {
+            let button = ButtonNode(titled: title, backgroundName: "button_background")
+            button.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 200 + CGFloat(100 * index))
+            button.name = title
+            button.label.name = title
+            addChild(button)
+        }
         
-        let currentScore = ButtonNode(titled: "10000", backgroundName: "button_background")
-        currentScore.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 10) //размещаем кнопку на экране
-        currentScore.name = "currentScore" //даем имя
-        currentScore.label.name = "currentScore"
-        addChild(currentScore) //добавляем на сцену
-                
+        let topPlaces = places.sorted { $0 > $1 }.prefix(3) // элемент слева чтобы был больше чем справа, обрезаем массив до 3 элементов
+        
+        for (index, value) in topPlaces.enumerated() {
+            
+            let topResult = SKLabelNode(text: value.description)
+            topResult.fontColor = UIColor(red: 219/255, green: 226/255, blue: 215/255, alpha: 1)
+            topResult.fontName = "AmericanTypewriter-Bold"
+            topResult.fontSize = 30
+            topResult.position = CGPoint(x: self.frame.midX, y: self.frame.midY - CGFloat(index * 60)) //в зависимости от индекса будет расположение ниже
+            addChild(topResult)
+          
+        }      
     }
   
     
