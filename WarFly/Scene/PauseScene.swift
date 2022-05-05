@@ -7,19 +7,13 @@
 
 import SpriteKit
 
-class PauseScene: SKScene {
-    
-    let sceneManager = SceneManager.shared
+class PauseScene: ParentScene {
     
     override func didMove(to view: SKView) {
-       
-        self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
         
+        setColorBackground(redColor: 0.15, greenColor: 0.15, blueColor: 0.3, alphaPosition: 1.0)
         
-        let header = ButtonNode(titled: "pause", backgroundName: "header_background")
-        header.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 150)
-        self.addChild(header)
-        
+        setHeader(withName: "pause", andBackground: "header_background")
         //Нормальная запись
         let titles = ["restart", "options", "resume"]
         for (index, title) in titles.enumerated() {
@@ -47,7 +41,7 @@ class PauseScene: SKScene {
         let node = self.atPoint(location)
         
         if node.name == "restart" { //если свойство имени равно  = runButton
-            sceneManager.gameScene = nil //удаляем из gameScene - нашу сцену 
+            sceneManager.gameScene = nil //удаляем из gameScene - нашу сцену
             let transition = SKTransition.crossFade(withDuration: 1.0) //осуществляем переход - transition,  (crossFade - использует эффект расстворения и переходит на другую сцену)
             let gameScene = GameScene(size: self.size)
             gameScene.scaleMode = .aspectFill
@@ -59,6 +53,14 @@ class PauseScene: SKScene {
             guard let gameScene = sceneManager.gameScene else { return }
             gameScene.scaleMode = .aspectFill
             self.scene?.view?.presentScene(gameScene, transition: transition) //осуществляем сам переход
+            
+        } else if node.name == "options" {
+            
+            let transition = SKTransition.crossFade(withDuration: 1.0)
+            let optionScene = OptionsScene(size: self.size) //указываем, что размер сцены будет такой же как и текущая сцена
+            optionScene.backScene = self //здесь происходит, что текущая сцена (PauseScene) будет обратной для optionScene
+            optionScene.scaleMode = .aspectFill
+            self.scene?.view?.presentScene(optionScene, transition: transition) //осуществляем сам переход
         }
     }
     

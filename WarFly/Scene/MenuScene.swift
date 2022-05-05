@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class MenuScene: SKScene {
+class MenuScene: ParentScene {
     
 //MARK: - didMove(to view:)
     override func didMove(to view: SKView) {
@@ -16,11 +16,9 @@ class MenuScene: SKScene {
             Assets.shared.isLoaded = true
         }
     
-        self.backgroundColor = SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 1.0)
-        let header = SKSpriteNode(imageNamed: "header1")
-        header.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 150)
-        self.addChild(header)
-        
+        setColorBackground(redColor: 0.15, greenColor: 0.15, blueColor: 0.3, alphaPosition: 1.0)
+        setHeader(withName:nil, andBackground: "header1")
+
         //Нормальная запись 
         let titles = ["play", "options", "best"]
         for (index, title) in titles.enumerated() {
@@ -43,7 +41,23 @@ class MenuScene: SKScene {
             let gameScene = GameScene(size: self.size)
             gameScene.scaleMode = .aspectFill
             self.scene?.view?.presentScene(gameScene, transition: transition) //осуществляем сам переход
+        } else if node.name == "options" {
+            
+            let transition = SKTransition.crossFade(withDuration: 1.0)
+            let optionScene = OptionsScene(size: self.size) //указываем, что размер сцены будет такой же как и текущая сцена
+            optionScene.backScene = self //здесь происходит, что текущая сцена (PauseScene) будет обратной для optionScene
+            optionScene.scaleMode = .aspectFill
+            self.scene?.view?.presentScene(optionScene, transition: transition) //осуществляем сам переход (отображение сцены)
+            
+        } else if node.name == "best" {
+            
+            let transition = SKTransition.crossFade(withDuration: 1.0)
+            let bestScene = BestScene(size: self.size) //указываем, что размер сцены будет такой же как и текущая сцена
+            bestScene.backScene = self //здесь происходит, что текущая сцена (MenuScene) будет обратной для optionScene
+            bestScene.scaleMode = .aspectFill
+            self.scene?.view?.presentScene(bestScene, transition: transition) //осуществляем сам переход
         }
+        
     }
     
     
