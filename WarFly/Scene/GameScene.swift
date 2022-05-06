@@ -16,7 +16,28 @@ class GameScene: ParentScene {
     private var player: PlayerPlain!
     private  let hud = HUD()
     private let screenSize = UIScreen.main.bounds.size
-  
+    
+    private var lives = 3 {//как только количество жизней меняется от 3, выполняется код ниже
+      //при изменении значения данного свойства будет отрабатывать код ниже
+        didSet {
+            switch lives {
+            case 3:
+                hud.life1.isHidden = false
+                hud.life2.isHidden = false
+                hud.life3.isHidden = false
+            case 2:
+                hud.life1.isHidden = false
+                hud.life2.isHidden = false
+                hud.life3.isHidden = true
+            case 1:
+                hud.life1.isHidden = false
+                hud.life2.isHidden = true
+                hud.life3.isHidden = true
+            default:
+                break
+            }
+        }
+    }
    
     //MARK: - didMove(to View:)
     override func didMove(to view: SKView) {
@@ -218,6 +239,7 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
 
         guard let explosion = SKEmitterNode(fileNamed: "EnemyExplosion") else { return }
+        explosion.zPosition = 25 
         //пытаемся получить точкв которой соприкасается наша пуля с врагом либо самолет с врагом
         let contactPoint = contact.contactPoint //получили точку
         explosion.position = contactPoint //разместили взрыв по этим координатам
@@ -228,20 +250,37 @@ extension GameScene: SKPhysicsContactDelegate {
             
         case[.enemy, .player]: print("enemy vs player")
             if contact.bodyA.node?.name == "Sprite" { //то мы точно знаем, что это не наш самолет. А наш враг
-                contact.bodyA.node?.removeFromParent()
+                if  contact.bodyA.node?.parent != nil { //если не удален родитель
+                    contact.bodyA.node?.removeFromParent() //удаляем
+                    lives -= 1 //уменьшаем количество жизней
+                }
+               
             } else {
-                contact.bodyB.node?.removeFromParent()
+                if  contact.bodyB.node?.parent != nil { //если не удален родитель
+                    contact.bodyB.node?.removeFromParent() //удаляем
+                    lives -= 1 //уменьшаем количество жизней
+                }
+               
             }
             addChild(explosion)
             self.run(waitForExplosionAction) {
                 explosion.removeFromParent()
             }
+            print(lives)
             
         case[.powerUp, .player]: print("powerUp vs player")
             
         case[.enemy, .shot]: print("enemy vs shot")
-            contact.bodyA.node?.removeFromParent()
-            contact.bodyB.node?.removeFromParent()
+            
+            if  contact.bodyA.node?.parent != nil { //если не удален родитель
+                contact.bodyA.node?.removeFromParent() //удаляем
+        } else {
+            if  contact.bodyB.node?.parent != nil { //если не удален родитель
+                contact.bodyB.node?.removeFromParent() //
+            }
+        }
+//            contact.bodyA.node?.removeFromParent()
+//            contact.bodyB.node?.removeFromParent()
             
             addChild(explosion)
             self.run(waitForExplosionAction) {
