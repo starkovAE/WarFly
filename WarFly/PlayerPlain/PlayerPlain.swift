@@ -162,7 +162,22 @@ class PlayerPlain: SKSpriteNode {
         }
         
     }
-    
+    func greenPowerUp()  {
+         //Анимация самолета при взаимодействии с powerUp
+        let colorAction = SKAction.colorize(with: .green, colorBlendFactor: 1.0, duration: 0.2)
+        let uncolorAction = SKAction.colorize(with: .green, colorBlendFactor: 0.0, duration: 0.2)
+        let sequenceAction = SKAction.sequence([colorAction, uncolorAction])
+        let repeatAction = SKAction.repeat(sequenceAction, count: 5)
+        self.run(repeatAction)
+    }
+    func bluePowerUp()  {
+        //Анимация самолета при взаимодействии с powerUp
+        let colorAction = SKAction.colorize(with: .blue, colorBlendFactor: 1.0, duration: 0.2)
+        let uncolorAction = SKAction.colorize(with: .blue, colorBlendFactor: 0.0, duration: 0.2)
+        let sequenceAction = SKAction.sequence([colorAction, uncolorAction])
+        let repeatAction = SKAction.repeat(sequenceAction, count: 5)
+        self.run(repeatAction)
+    }
 } //закрывает класс
 
 //MARK: - Enum TurnDiraction - смена направления (поворот)

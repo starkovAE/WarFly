@@ -10,7 +10,12 @@ import SpriteKit
 class HUD: SKNode {
     //MARK: - Элементы пользовательского интерфейса
     let scoreBacground = SKSpriteNode(imageNamed: "scores")
-    let scoreLabel = SKLabelNode(text: "10000")
+    let scoreLabel = SKLabelNode(text: "0")
+    var score: Int = 0 { //как только значение score будет меняться, score будет переведен в текстовый формат и помещено в scoreLabel.text
+        didSet {
+            scoreLabel.text = score.description
+        }
+    }
     let menuButton = SKSpriteNode(imageNamed: "menu")
     let life1 = SKSpriteNode(imageNamed: "life")
     let life2 = SKSpriteNode(imageNamed: "life")

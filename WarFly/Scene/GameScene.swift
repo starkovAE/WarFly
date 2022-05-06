@@ -10,15 +10,15 @@ import GameplayKit
 
 
 class GameScene: ParentScene {
-
-   
+    
+    
     //создаем игрока
     private var player: PlayerPlain!
     private  let hud = HUD()
     private let screenSize = UIScreen.main.bounds.size
     
     private var lives = 3 {//как только количество жизней меняется от 3, выполняется код ниже
-      //при изменении значения данного свойства будет отрабатывать код ниже
+        //при изменении значения данного свойства будет отрабатывать код ниже
         didSet {
             switch lives {
             case 3:
@@ -38,11 +38,11 @@ class GameScene: ParentScene {
             }
         }
     }
-   
+    
     //MARK: - didMove(to View:)
     override func didMove(to view: SKView) {
         
-       
+        
         self.scene?.isPaused = false
         guard sceneManager.gameScene == nil else { return } //если тру (значит сцена еще не создана) - идет дальше по коду, если false (значит сцена уже есть) - выходит из метода
         sceneManager.gameScene = self //произошла загрузка текущей сцены (присвоили свойству gameScene - текущую сцену)
@@ -50,7 +50,7 @@ class GameScene: ParentScene {
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector.zero //силу гравитации приравниванием к 0, чтобы самолеты не падали
         //Проверяем существует ли данная сцена уже?
-     
+        
         configurateStartScene()
         spawnClouds()
         spawnIsland()
@@ -68,7 +68,7 @@ class GameScene: ParentScene {
     //MARK: - createPowerUp()
     private func spawnPowerUp() {
         //создаем powerUp
- 
+        
         let spawnAction = SKAction.run {
             let randomNumber = Int(arc4random_uniform(2))
             let powerUp = randomNumber == 1 ? BluePowerUp() : GreenPowerUp()
@@ -84,7 +84,7 @@ class GameScene: ParentScene {
         
         self.run(SKAction.repeatForever(SKAction.sequence([spawnAction, waitAction])))
         
-      
+        
     }
     
     //MARK: - spawnEnemies()
@@ -126,7 +126,7 @@ class GameScene: ParentScene {
         }
         
     }
-//MARK: - configurateStartScene()
+    //MARK: - configurateStartScene()
     private func configurateStartScene() {
         let sprite = SKSpriteNode(color: .blue, size: CGSize(width: 100, height: 100))
         sprite.position = CGPoint(x: 200, y: 200)
@@ -141,22 +141,22 @@ class GameScene: ParentScene {
         
         //узнаем размер экрана пользователя
         let screen = UIScreen.main.bounds
-      
+        
         //создаем остров
         let island1 = Island.polulate(at: CGPoint(x: 100, y: 200))
-     
+        
         self.addChild(island1)
         
         let island2 = Island.polulate(at: CGPoint(x: self.size.width - 100, y: self.size.height - 200))
-    
+        
         self.addChild(island2)
         
-
+        
         player = PlayerPlain.populate(at: CGPoint(x: screen.size.width / 2, y: 100))
         self.addChild(player)
         
         
-       
+        
     }
     //MARK: - Метод srawnClouds(), который будет генирировать облака
     private func spawnClouds() {
@@ -196,19 +196,39 @@ class GameScene: ParentScene {
             if node.position.y <= -100 {
                 node.removeFromParent() //все node (облака и острова) ниже нуля будут удаляться
                 
-        
+                
             }
         }
+        enumerateChildNodes(withName: "bluePowerUp") { node, stop in
+            if node.position.y <= -100 {
+                node.removeFromParent() //удаляем их со сцены, если их позция ниже у = -100
+                
+                
+            }
+        }
+        
+        enumerateChildNodes(withName: "greenPowerUp") { node, stop in
+            if node.position.y <= -100 {
+                node.removeFromParent() //удаляем их со сцены, если их позция ниже у = -100
+                
+                
+            }
+        }
+        
+        
+        
+        
+        
         //Для удаления выстрела (так как он летит снизу вверх)
         enumerateChildNodes(withName: "shotSprite") { node, stop in //node - это сам объхект, который мы получили при переборе, stop - это флаг, который возвращает либо тру либо фолс
             if node.position.y >= self.size.height + 100 {
                 node.removeFromParent() //все node (облака и острова) ниже нуля будут удаляться
                 
-               
+                
             }
         }
     }
-    //MARK: - playerFire() 
+    //MARK: - playerFire()
     private func playerFire() {
         let shot = YellowShot()
         shot.position = self.player.position //позиция выстрела будет совпадать с центром самолета
@@ -217,29 +237,29 @@ class GameScene: ParentScene {
     }
     //MARK: -touchesBegan() -  Что мы должны делать, когда зафиксированы прикосновения к экрану
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            guard let location = touches.first?.location(in: self) else { return }//касание внутри этой сцены (self)
-            let node = self.atPoint(location)
-            
-            if node.name == "pause" { //если свойство имени равно  = runButton
-                let transition = SKTransition.doorway(withDuration: 1.0)
-                let pauseScene = PauseScene(size: self.size)
-                pauseScene.scaleMode = .aspectFill
-                sceneManager.gameScene = self
-                self.scene?.isPaused = true
-                self.scene?.view?.presentScene(pauseScene, transition: transition) //осуществляем сам переход
-            } else {
+        guard let location = touches.first?.location(in: self) else { return }//касание внутри этой сцены (self)
+        let node = self.atPoint(location)
         
-                playerFire()
-            }
-      
+        if node.name == "pause" { //если свойство имени равно  = runButton
+            let transition = SKTransition.doorway(withDuration: 1.0)
+            let pauseScene = PauseScene(size: self.size)
+            pauseScene.scaleMode = .aspectFill
+            sceneManager.gameScene = self
+            self.scene?.isPaused = true
+            self.scene?.view?.presentScene(pauseScene, transition: transition) //осуществляем сам переход
+        } else {
+            
+            playerFire()
+        }
+        
     }
 }// закрвыает класс
 
 extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
-
+        
         guard let explosion = SKEmitterNode(fileNamed: "EnemyExplosion") else { return }
-        explosion.zPosition = 25 
+        explosion.zPosition = 25
         //пытаемся получить точкв которой соприкасается наша пуля с врагом либо самолет с врагом
         let contactPoint = contact.contactPoint //получили точку
         explosion.position = contactPoint //разместили взрыв по этим координатам
@@ -254,45 +274,78 @@ extension GameScene: SKPhysicsContactDelegate {
                     contact.bodyA.node?.removeFromParent() //удаляем
                     lives -= 1 //уменьшаем количество жизней
                 }
-               
+                
             } else {
                 if  contact.bodyB.node?.parent != nil { //если не удален родитель
                     contact.bodyB.node?.removeFromParent() //удаляем
                     lives -= 1 //уменьшаем количество жизней
                 }
-               
+                
             }
             addChild(explosion)
             self.run(waitForExplosionAction) {
                 explosion.removeFromParent()
             }
-            print(lives)
+            if lives == 0 {
+                let gameOverScene = GameOverScene(size: self.size)
+                gameOverScene.scaleMode = .aspectFill
+                let transition = SKTransition.doorsCloseVertical(withDuration: 1.0)
+                self.scene?.view?.presentScene(gameOverScene, transition: transition) //осуществляем сам переход
+            }
             
         case[.powerUp, .player]: print("powerUp vs player")
+           
+            if contact.bodyA.node?.parent != nil && contact.bodyB.node?.parent != nil { //равен ли один из родителей или оба родителя сталкивающихся объектов нил, если они равны или один из них равен нил. тогда мы ничего не делаем, если не равен мы падаем внутрь конструкции
+              
+                if contact.bodyA.node?.name == "bluePowerUp" {
+                    contact.bodyA.node?.removeFromParent()
+                    lives = 3
+                    player.bluePowerUp()
+                } else if contact.bodyB.node?.name == "bluePowerUp" {
+                    contact.bodyB.node?.removeFromParent()
+                    lives = 3
+                    player.bluePowerUp()
+                }
+                
+                if contact.bodyA.node?.name == "greenPowerUp" {
+                    contact.bodyA.node?.removeFromParent()
+                    player.greenPowerUp()
+                    
+                    
+                } else {
+                    contact.bodyB.node?.removeFromParent()
+                    player.greenPowerUp()
+                }
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
         case[.enemy, .shot]: print("enemy vs shot")
-            
-            if  contact.bodyA.node?.parent != nil { //если не удален родитель
-                contact.bodyA.node?.removeFromParent() //удаляем
-        } else {
-            if  contact.bodyB.node?.parent != nil { //если не удален родитель
-                contact.bodyB.node?.removeFromParent() //
+            if contact.bodyA.node?.parent != nil { //если родитель равен нил, значит столкновение произошло
+                //если не нил(если столкновение не произошло)
+                contact.bodyA.node?.removeFromParent()
+                contact.bodyB.node?.removeFromParent()
+                hud.score += 5
+                addChild(explosion)
+                self.run(waitForExplosionAction) {
+                    explosion.removeFromParent()
+                }
             }
-        }
-//            contact.bodyA.node?.removeFromParent()
-//            contact.bodyB.node?.removeFromParent()
-            
-            addChild(explosion)
-            self.run(waitForExplosionAction) {
-                explosion.removeFromParent()
-            }
-            
         default:
             preconditionFailure("Unable to detect collision category")
-
+            
         }
     }
-
+    
+    
     func didEnd(_ contact: SKPhysicsContact) {
         
     }
