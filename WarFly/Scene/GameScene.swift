@@ -217,36 +217,43 @@ class GameScene: ParentScene {
 extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
 
+        guard let explosion = SKEmitterNode(fileNamed: "EnemyExplosion") else { return }
+        //пытаемся получить точкв которой соприкасается наша пуля с врагом либо самолет с врагом
+        let contactPoint = contact.contactPoint //получили точку
+        explosion.position = contactPoint //разместили взрыв по этим координатам
+        let waitForExplosionAction = SKAction.wait(forDuration: 1.0)
+        
         let contactCategory: BitMaskCategory  = [contact.bodyA.category, contact.bodyB.category]
         switch contactCategory {
+            
         case[.enemy, .player]: print("enemy vs player")
+            if contact.bodyA.node?.name == "Sprite" { //то мы точно знаем, что это не наш самолет. А наш враг
+                contact.bodyA.node?.removeFromParent()
+            } else {
+                contact.bodyB.node?.removeFromParent()
+            }
+            addChild(explosion)
+            self.run(waitForExplosionAction) {
+                explosion.removeFromParent()
+            }
+            
         case[.powerUp, .player]: print("powerUp vs player")
+            
         case[.enemy, .shot]: print("enemy vs shot")
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyB.node?.removeFromParent()
+            
+            addChild(explosion)
+            self.run(waitForExplosionAction) {
+                explosion.removeFromParent()
+            }
+            
         default:
             preconditionFailure("Unable to detect collision category")
 
         }
     }
-   
-      /* CТАРЫЙ КОД:
-        let bodyA = contact.bodyA.categoryBitMask //какие ьитовые маски сталкиваются
-        let bodyB = contact.bodyB.categoryBitMask
-        
-        let player = BitMaskCategory.player //присваиваем битовые маски 
-        let enemy = BitMaskCategory.enemy
-        let shot = BitMaskCategory.shot
-        let powerUp = BitMaskCategory.powerUp
-        
-        if bodyA == player && bodyB == enemy || bodyB == player && bodyA == enemy { //самолет и враг
-            print("enemy vs player")
-        } else if bodyA == player && bodyB == powerUp || bodyA == player && bodyB == powerUp  {
-            print("powerUp vs player")
-        } else if bodyA == shot && bodyB == enemy || bodyA == shot && bodyB == enemy {
-            print("enemy vs shot")
-        }*/
-        
-        
-   
+
     func didEnd(_ contact: SKPhysicsContact) {
         
     }
