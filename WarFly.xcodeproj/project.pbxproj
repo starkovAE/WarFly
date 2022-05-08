@@ -33,6 +33,7 @@
 		3F4C68362804872D00E4EFEE /* BitMaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C68352804872D00E4EFEE /* BitMaskCategory.swift */; };
 		3F5D32B328280DB6001BFF77 /* hitSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D32B128280DB6001BFF77 /* hitSound.wav */; };
 		3F5D32B428280DB6001BFF77 /* backgroundMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D32B228280DB6001BFF77 /* backgroundMusic.m4a */; };
+		3F5D32B628280FF2001BFF77 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D32B528280FF2001BFF77 /* GameSettings.swift */; };
 		3F6CEBCB28240D9F007076C3 /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CEBCA28240D9F007076C3 /* SceneManager.swift */; };
 		3F6CEBCD28241B12007076C3 /* ParentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CEBCC28241B12007076C3 /* ParentScene.swift */; };
 		3F6CEBD028241EE2007076C3 /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CEBCF28241EE2007076C3 /* OptionsScene.swift */; };
@@ -74,6 +75,7 @@
 		3F4C68352804872D00E4EFEE /* BitMaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMaskCategory.swift; sourceTree = "<group>"; };
 		3F5D32B128280DB6001BFF77 /* hitSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitSound.wav; sourceTree = "<group>"; };
 		3F5D32B228280DB6001BFF77 /* backgroundMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = backgroundMusic.m4a; sourceTree = "<group>"; };
+		3F5D32B528280FF2001BFF77 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		3F6CEBCA28240D9F007076C3 /* SceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
 		3F6CEBCC28241B12007076C3 /* ParentScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentScene.swift; sourceTree = "<group>"; };
 		3F6CEBCF28241EE2007076C3 /* OptionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsScene.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				3F6CEBCA28240D9F007076C3 /* SceneManager.swift */,
+				3F5D32B528280FF2001BFF77 /* GameSettings.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			files = (
 				3F4B078D27FE183E00735244 /* PlayerPlain.swift in Sources */,
 				3F4C68282804793000E4EFEE /* YellowShot.swift in Sources */,
+				3F5D32B628280FF2001BFF77 /* GameSettings.swift in Sources */,
 				3F4B077627FDF38000735244 /* GameScene.swift in Sources */,
 				3F4B078B27FE0CD100735244 /* Cloud.swift in Sources */,
 				3F4B077827FDF38000735244 /* GameViewController.swift in Sources */,
