@@ -11,7 +11,7 @@ import GameplayKit
 
 class GameScene: ParentScene {
     
-    
+    var backgroundMusic: SKAudioNode!
     //создаем игрока
     private var player: PlayerPlain!
     private  let hud = HUD()
@@ -41,7 +41,11 @@ class GameScene: ParentScene {
     
     //MARK: - didMove(to View:)
     override func didMove(to view: SKView) {
-        
+        if let musicURL = Bundle.main.url(forResource: "backgroundMusic", withExtension: "m4a") {
+            backgroundMusic = SKAudioNode(url: musicURL)
+            addChild(backgroundMusic
+            )
+        }
         
         self.scene?.isPaused = false
         guard sceneManager.gameScene == nil else { return } //если тру (значит сцена еще не создана) - идет дальше по коду, если false (значит сцена уже есть) - выходит из метода
@@ -317,22 +321,13 @@ extension GameScene: SKPhysicsContactDelegate {
                     player.greenPowerUp()
                 }
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+    
         case[.enemy, .shot]: print("enemy vs shot")
-            if contact.bodyA.node?.parent != nil { //если родитель равен нил, значит столкновение произошло
+            if contact.bodyA.node?.parent != nil && contact.bodyB.node?.parent != nil { //если родитель равен нил, значит столкновение произошло
                 //если не нил(если столкновение не произошло)
                 contact.bodyA.node?.removeFromParent()
                 contact.bodyB.node?.removeFromParent()
+                self.run(SKAction.playSoundFileNamed("hitSound", waitForCompletion: false))
                 hud.score += 5
                 addChild(explosion)
                 self.run(waitForExplosionAction) {

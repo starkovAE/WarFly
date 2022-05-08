@@ -13,7 +13,6 @@
 		3F36805527FF86DF00E9AD30 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F36805427FF86DF00E9AD30 /* Enemy.swift */; };
 		3F36805727FF895B00E9AD30 /* Enemy_1.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3F36805627FF895B00E9AD30 /* Enemy_1.atlas */; };
 		3F3C34AE2825099500A53683 /* EnemyExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F3C34AC2825099500A53683 /* EnemyExplosion.sks */; };
-		3F3C34AF2825099500A53683 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F3C34AD2825099500A53683 /* Assets.xcassets */; };
 		3F3C34B2282512A100A53683 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3C34B1282512A100A53683 /* GameOverScene.swift */; };
 		3F4B077027FDF38000735244 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B076F27FDF38000735244 /* AppDelegate.swift */; };
 		3F4B077627FDF38000735244 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4B077527FDF38000735244 /* GameScene.swift */; };
@@ -32,6 +31,8 @@
 		3F4C682A28047B9800E4EFEE /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C682928047B9800E4EFEE /* Assets.swift */; };
 		3F4C6834280482E000E4EFEE /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C6833280482E000E4EFEE /* MenuScene.swift */; };
 		3F4C68362804872D00E4EFEE /* BitMaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C68352804872D00E4EFEE /* BitMaskCategory.swift */; };
+		3F5D32B328280DB6001BFF77 /* hitSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D32B128280DB6001BFF77 /* hitSound.wav */; };
+		3F5D32B428280DB6001BFF77 /* backgroundMusic.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D32B228280DB6001BFF77 /* backgroundMusic.m4a */; };
 		3F6CEBCB28240D9F007076C3 /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CEBCA28240D9F007076C3 /* SceneManager.swift */; };
 		3F6CEBCD28241B12007076C3 /* ParentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CEBCC28241B12007076C3 /* ParentScene.swift */; };
 		3F6CEBD028241EE2007076C3 /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6CEBCF28241EE2007076C3 /* OptionsScene.swift */; };
@@ -52,7 +53,6 @@
 		3F36805427FF86DF00E9AD30 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		3F36805627FF895B00E9AD30 /* Enemy_1.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Enemy_1.atlas; sourceTree = "<group>"; };
 		3F3C34AC2825099500A53683 /* EnemyExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EnemyExplosion.sks; sourceTree = "<group>"; };
-		3F3C34AD2825099500A53683 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F3C34B1282512A100A53683 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		3F4B076C27FDF38000735244 /* WarFly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WarFly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F4B076F27FDF38000735244 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +72,8 @@
 		3F4C682928047B9800E4EFEE /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		3F4C6833280482E000E4EFEE /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		3F4C68352804872D00E4EFEE /* BitMaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMaskCategory.swift; sourceTree = "<group>"; };
+		3F5D32B128280DB6001BFF77 /* hitSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitSound.wav; sourceTree = "<group>"; };
+		3F5D32B228280DB6001BFF77 /* backgroundMusic.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = backgroundMusic.m4a; sourceTree = "<group>"; };
 		3F6CEBCA28240D9F007076C3 /* SceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
 		3F6CEBCC28241B12007076C3 /* ParentScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentScene.swift; sourceTree = "<group>"; };
 		3F6CEBCF28241EE2007076C3 /* OptionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsScene.swift; sourceTree = "<group>"; };
@@ -115,7 +117,6 @@
 		3F4B076327FDF38000735244 = {
 			isa = PBXGroup;
 			children = (
-				3F3C34AD2825099500A53683 /* Assets.xcassets */,
 				3F4B076E27FDF38000735244 /* WarFly */,
 				3F4B076D27FDF38000735244 /* Products */,
 			);
@@ -261,6 +262,8 @@
 			isa = PBXGroup;
 			children = (
 				3F4B077927FDF38000735244 /* Main.storyboard */,
+				3F5D32B228280DB6001BFF77 /* backgroundMusic.m4a */,
+				3F5D32B128280DB6001BFF77 /* hitSound.wav */,
 				3F4B077C27FDF38100735244 /* Assets.xcassets */,
 				3F4B077E27FDF38100735244 /* LaunchScreen.storyboard */,
 			);
@@ -327,14 +330,15 @@
 			files = (
 				3FFCDA7328006BF90014EA25 /* Enemy_2.atlas in Resources */,
 				3F36805727FF895B00E9AD30 /* Enemy_1.atlas in Resources */,
-				3F3C34AF2825099500A53683 /* Assets.xcassets in Resources */,
 				3F4B077B27FDF38000735244 /* Main.storyboard in Resources */,
 				3F4C6823280476DF00E4EFEE /* YellowAmmo.atlas in Resources */,
 				3F36805127FF7EB900E9AD30 /* GreenPowerUp.atlas in Resources */,
 				3F4B078F27FE18F500735244 /* PlayerPlane.atlas in Resources */,
 				3F3C34AE2825099500A53683 /* EnemyExplosion.sks in Resources */,
 				3F4B077D27FDF38100735244 /* Assets.xcassets in Resources */,
+				3F5D32B428280DB6001BFF77 /* backgroundMusic.m4a in Resources */,
 				3FFCDA782800897C0014EA25 /* BluePowerUp.atlas in Resources */,
+				3F5D32B328280DB6001BFF77 /* hitSound.wav in Resources */,
 				3F4B078027FDF38100735244 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
